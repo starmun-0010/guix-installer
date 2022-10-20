@@ -24,6 +24,14 @@ jobs:
 
       - name: Build ISO
         run: |
+          # Add custom substitute
+          sudo guix system reconfigure './guix/substitutes.scm'
+          
+          # Restart guix daemon
+          sudo herd restart guix-daemon 
+          
+          # Check substitute
+          guix weather --substitute-urls='https://substitutes.nonguix.org'
           # Write out the channels file so it can be included
           guix time-machine -C './guix/base-channels.scm' -- describe -f channels > './guix/channels.scm'
 
