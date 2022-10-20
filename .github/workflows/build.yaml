@@ -50,4 +50,4 @@ jobs:
           files: guix-installer-${{ env.RELEASE_TAG }}.iso
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: SystemCrafters/guix-installer
+          GITHUB_REPOSITORY: starmun-0010/guix-installer
