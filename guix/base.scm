@@ -45,5 +45,5 @@
                   %default-substitute-urls))
                (authorized-keys
                 (append (list (local-file "signing-key.pub"))
-                  %default-authorized-guix-keys))))))
+                  %default-authorized-guix-keys)))))))))
  installation-os-nonfree
