@@ -25,7 +25,7 @@ jobs:
       - name: Build ISO
         run: |
           # Add custom substitute
-          sudo guix system reconfigure './guix/substitutes.scm'
+          sudo guix system reconfigure './guix/base.scm'
           
           # Restart guix daemon
           sudo herd restart guix-daemon 

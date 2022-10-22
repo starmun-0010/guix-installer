@@ -23,32 +23,19 @@
   #:use-module (gnu system)
   #:use-module (gnu system install)
   #:use-module (gnu packages version-control)
-  #:use-module (gnu packages vim)
-  #:use-module (gnu packages curl)
-  #:use-module (gnu packages emacs)
-  #:use-module (gnu packages linux)
-  #:use-module (gnu packages mtools)
-  #:use-module (gnu packages package-management)
-  #:use-module (nongnu packages linux)
   #:use-module (guix)
   #:export (installation-os-nonfree))
 
 (define installation-os-nonfree
   (operating-system
     (inherit installation-os)
-    (kernel linux)
-    (firmware (list linux-firmware))
-
-    ;; Add the 'net.ifnames' argument to prevent network interfaces
-    ;; from having really long names.  This can cause an issue with
-    ;; wpa_supplicant when you try to connect to a wifi network.
-    (kernel-arguments '("quiet" "modprobe.blacklist=radeon" "net.ifnames=0"))
 
     (services
      (cons*
       ;; Include the channel file so that it can be used during installation
       (simple-service 'channel-file etc-service-type
-                      (list `("channels.scm" ,(local-file "channels.scm"))))
+                      (list `("channels.scm" ,(local-file "channels.scm"))
+                            `("signing-key.pub", (local-file "signing-key.pub")))
       (operating-system-user-services installation-os))
       (modify-services %base-services
              (guix-service-type config => (guix-configuration
@@ -59,10 +46,4 @@
                (authorized-keys
                 (append (list (local-file "signing-key.pub"))
                   %default-authorized-guix-keys))))))
-
-    ;; Add some extra packages useful for the installation process
-    (packages
-     (append (list git curl stow vim emacs-no-x-toolkit)
-             (operating-system-packages installation-os)))))
-
-installation-os-nonfree
+ installation-os-nonfree
