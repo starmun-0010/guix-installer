@@ -26,7 +26,7 @@ jobs:
         run: |
           
           # Restart guix daemon
-          sudo guix archive --authorize < './guix/signing-key.pub'
+          sudo guix archive --authorize < './guix/key.pub'
 
           # Check substitute
           guix weather --substitute-urls='https://substitutes.nonguix.org'
@@ -35,7 +35,7 @@ jobs:
           guix time-machine -C './guix/base-channels.scm' -- describe -f channels > './guix/channels.scm'
 
           # Build the image
-          image=$(guix time-machine -C './guix/channels.scm' -- system image -t iso9660 --substitute-urls='https://substitutes.nonguix.org' './guix/installer.scm')
+          image=$(guix time-machine -C './guix/channels.scm' -- system image -t iso9660 --substitute-urls='https://substitutes.nonguix.org https://bordeaux.guix.gnu.org https://ci.guix.gnu.org' './guix/installer.scm')
 
           # Copy the image to the local folder with a better name
           export RELEASE_TAG=$(date +"%Y%m%d%H%M")
