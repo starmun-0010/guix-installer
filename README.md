@@ -1,4 +1,5 @@
-# System Crafters Guix Installer
+# Star's Guix Installer
+**Based on System Crafters Guix Installer**
 
 This repository runs _automated CI builds_ to produce a
 [GNU Guix](https://guix.gnu.org) installation image using the
@@ -15,10 +16,15 @@ anything malicious to these builds!
 we're making improvements to the configuration.**
 
 ## Table of Contents
-- [System Crafters Guix Installer](#system-crafters-guix-installer)
+- [Star's Guix Installer](#stars-guix-installer)
+  - [Differences](#differences-from-system-crafters-installer)
   - [Instructions](#instructions)
   - [Attributions](#attributions)
   - [License](#license)
+
+## Differences from System Crafters Installer
+1. Includes nonguix substitutes within the installation image.
+2. TBD
 
 ## Instructions
 
