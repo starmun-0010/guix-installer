@@ -21,13 +21,14 @@ jobs:
 
       - name: Install Guix
         uses: PromyLOPh/guix-install-action@v1
-
-      - name: Build ISO
+      
+      - name: Add nonguix key
         run: |
-          
           # Restart guix daemon
           sudo guix archive --authorize < './guix/key.pub'
 
+      - name: Build ISO
+        run: |
           # Write out the channels file so it can be included
           guix time-machine -C './guix/base-channels.scm' -- describe -f channels > './guix/channels.scm'
 
